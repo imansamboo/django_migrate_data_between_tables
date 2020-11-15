@@ -1,0 +1,45 @@
+{
+        "multiple_fields":[
+                {
+                        "inputs": ["row"],
+                        "model_field": "center",
+                        "func": "lambda **kwargs: Point(float(kwargs['row']['lng']), float(kwargs['row']['lat']))"
+                }
+        ] ,
+        "after_actions": [
+                {"inputs": ["saved_object"],"func":"lambda **kwargs: kwargs['saved_object'].owner.add(BasePerson.objects.get(national_code=kwargs['saved_object'].owner_national_code)) if BasePerson.objects.filter(national_code=kwargs['saved_object'].owner_national_code).count() > 0 else False"},
+                {"inputs": ["saved_object"],"func":"lambda **kwargs: kwargs['saved_object'].beneficiary.add(BasePerson.objects.get(national_code=kwargs['saved_object'].beneficiary_national_code)) if BasePerson.objects.filter(national_code=kwargs['saved_object'].beneficiary_national_code).count() > 0 else False"},
+                {"inputs": ["saved_object"], "func": "lambda **kwargs: kwargs['saved_object'].save()"}
+        ],
+        "_static_fields": [
+                {"key":"isstaff",   "value":true},
+                {"key":"email",   "value":false, "func": "lambda **kwargs: '%s@.jahad.com' % kwargs['username']", "inputs":  ["username"]},
+                {"key":"password",   "value":false, "func": "lambda **kwargs: kwargs.username", "inputs":  ["username"]}
+        ],
+        "id": {"unicode_convert": false, "model_field": "old_id", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "date_s": {"unicode_convert": false, "model_field": "registration_date", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "mor_cod_m": {"unicode_convert": false, "model_field": "zone_manager_national_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "id_ostan": {"unicode_convert": false, "model_field": "province_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "id_city": {"unicode_convert": false, "model_field": "county_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "id_mar": {"unicode_convert": false, "model_field": "agriculture_center_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "bah_cod_m": {"unicode_convert": false, "model_field": "beneficiary_national_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "num_bah": {"unicode_convert": false, "model_field": "beneficiary_count", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "sh_gat": {"unicode_convert": false, "model_field": "segment_number", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "check_cod": {"unicode_convert": false, "model_field": "", "need": false, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "m_zamin": {"unicode_convert": false, "model_field": "area", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "no_mal": {"unicode_convert": false, "model_field": "ownership_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": 0, "max_int": 7},
+        "m_cod_m": {"unicode_convert": false, "model_field": "owner_national_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "m_vaz_sok": {"unicode_convert": false, "model_field": "owner_housing_types", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "no_kesh": {"unicode_convert": false, "model_field": "cultivation_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "m_ab": {"unicode_convert": false, "model_field": "water_source_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": 0, "max_int": 11},
+        "md_ab": {"unicode_convert": false, "model_field": "water_circuit_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "h_ab": {"unicode_convert": false, "model_field": "water_contribution", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "no_sab": {"unicode_convert": false, "model_field": "registration_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "no_ab": {"unicode_convert": false, "model_field": "water_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "es": {"unicode_convert": false, "model_field": "pool_type", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": 0, "max_int": 3},
+        "t_mah": {"unicode_convert": false, "model_field": "product_count", "need": true, "convert_to_int": true, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "z_sal": {"unicode_convert": false, "model_field": "agricultural_year", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": 0, "min_int": false, "max_int": false},
+        "s_ayesh": {"unicode_convert": false, "model_field": "gross_area", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "add_abadi": {"unicode_convert": false, "model_field": "village_code", "need": true, "convert_to_int": false, "func" : "lambda a : a", "default": false, "min_int": false, "max_int": false},
+        "add_city": {"unicode_convert": false, "model_field": "city_code", "need": true, "default": false, "min_int": false, "max_int": false, "func" : "lambda a : a", "convert_to_int": false}
+    }
